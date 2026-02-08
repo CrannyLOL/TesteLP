@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Sistema de Satisfação</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="fullscreen-body">
+    <!-- BOTÃO ADMIN NO CANTO SUPERIOR DIREITO -->
+    <a class="btn-admin-header" href="/Templates/admin_login.html" title="Área administrativa">Admin</a>
+    
+    <div class="container-fullscreen">
+        <div class="card-fullscreen">
+            <h1 class="title-main">Como se sente?</h1>
+            <p class="subtitle-main">Avalie o seu nível de satisfação</p>
+            
+            <div class="button-group-fullscreen">
+                <button class="btn-fullscreen btn-success-full" onclick="votar('Muito satisfeito')" title="Muito satisfeito - Clique para avaliar">
+                    <span class="emoji-large">😄</span>
+                    <span class="btn-text">Muito<br>Satisfeito</span>
+                </button>
+                <button class="btn-fullscreen btn-warning-full" onclick="votar('Satisfeito')" title="Satisfeito - Clique para avaliar">
+                    <span class="emoji-large">🙂</span>
+                    <span class="btn-text">Satisfeito</span>
+                </button>
+                <button class="btn-fullscreen btn-danger-full" onclick="votar('Insatisfeito')" title="Insatisfeito - Clique para avaliar">
+                    <span class="emoji-large">😞</span>
+                    <span class="btn-text">Insatisfeito</span>
+                </button>
+            </div>
+
+            <div id="mensagem" class="mensagem-feedback"></div>
+            
+            <p class="info-bottom">Data: <strong id="data-atual"></strong> | Dia: <strong id="dia-atual"></strong></p>
+        </div>
+    </div>
+    
+    <script src="/static/js/main.js"></script>
+    <script type="module" src="js/firebase.js"></script>
+
+</body>
+</html>
