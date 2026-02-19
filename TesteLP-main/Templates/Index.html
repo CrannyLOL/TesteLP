@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Sistema de Satisfação</title>
+
+    <!-- CSS -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .fullscreen-body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .btn-admin-header {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .btn-admin-header:hover {
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .container-fullscreen {
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .card-fullscreen {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .title-main {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .subtitle-main {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            margin-bottom: 40px;
+        }
+
+        .button-group-fullscreen {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn-fullscreen {
+            background: #fff;
+            border: 3px solid #e1e8ed;
+            border-radius: 15px;
+            padding: 30px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 150px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            font-family: inherit;
+        }
+
+        .btn-fullscreen:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-success-full:hover {
+            border-color: #27ae60;
+            background: #d5f4e6;
+        }
+
+        .btn-warning-full:hover {
+            border-color: #f39c12;
+            background: #fdeaa7;
+        }
+
+        .btn-danger-full:hover {
+            border-color: #e74c3c;
+            background: #fadbd8;
+        }
+
+        .emoji-large {
+            font-size: 3rem;
+        }
+
+        .btn-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .mensagem-feedback {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .mensagem-feedback.sucesso {
+            background: #d5f4e6;
+            color: #27ae60;
+            border: 1px solid #a8e6cf;
+        }
+
+        .mensagem-feedback.erro {
+            background: #fadbd8;
+            color: #e74c3c;
+            border: 1px solid #f5c6cb;
+        }
+
+        .mensagem-feedback.carregando {
+            background: #e8f4fd;
+            color: #3498db;
+            border: 1px solid #aed6f1;
+        }
+
+        .mensagem-feedback.vazio {
+            display: none;
+        }
+
+        .info-bottom {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: #95a5a6;
+        }
+
+        @media (max-width: 768px) {
+            .card-fullscreen {
+                padding: 30px 20px;
+            }
+
+            .title-main {
+                font-size: 2rem;
+            }
+
+            .button-group-fullscreen {
+                gap: 15px;
+            }
+
+            .btn-fullscreen {
+                min-width: 120px;
+                padding: 20px 15px;
+            }
+
+            .emoji-large {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="fullscreen-body">
+
+    <!-- BOTÃO ADMIN -->
+    <a class="btn-admin-header" href="/admin_login" title="Área administrativa">
+        Admin
+    </a>
+    
+    <div class="container-fullscreen">
+        <div class="card-fullscreen">
+
+            <h1 class="title-main">Como se sente?</h1>
+            <p class="subtitle-main">Avalie o seu nível de satisfação</p>
+            
+            <div class="button-group-fullscreen">
+                
+                <button class="btn-fullscreen btn-success-full"
+                        onclick="votar('Muito satisfeito')">
+                    <span class="emoji-large">😄</span>
+                    <span class="btn-text">Muito<br>Satisfeito</span>
+                </button>
+
+                <button class="btn-fullscreen btn-warning-full"
+                        onclick="votar('Satisfeito')">
+                    <span class="emoji-large">🙂</span>
+                    <span class="btn-text">Satisfeito</span>
+                </button>
+
+                <button class="btn-fullscreen btn-danger-full"
+                        onclick="votar('Insatisfeito')">
+                    <span class="emoji-large">😞</span>
+                    <span class="btn-text">Insatisfeito</span>
+                </button>
+
+            </div>
+
+            <!-- MENSAGEM -->
+            <div id="mensagem" class="mensagem-feedback vazio"></div>
+            
+            <!-- DATA -->
+            <p class="info-bottom">
+                Data: <strong id="data-atual"></strong> |
+                Dia: <strong id="dia-atual"></strong>
+            </p>
+
+        </div>
+    </div>
+    
+    <!-- Script da data -->
+    <script>
+        const agora = new Date();
+
+        const dataFormatada = agora.toLocaleDateString('pt-PT');
+        const diaSemana = agora.toLocaleDateString('pt-PT', { weekday: 'long' });
+
+        document.getElementById("data-atual").textContent = dataFormatada;
+        document.getElementById("dia-atual").textContent = 
+            diaSemana.charAt(0).toUpperCase() + diaSemana.slice(1);
+    </script>
+
+    <!-- Firebase -->
+    <script type="module" src="/static/js/firebase.js"></script>
+    <script type="module" src="/static/js/main.js"></script>
+
+</body>
+</html>
